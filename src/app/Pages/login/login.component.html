@@ -1,0 +1,76 @@
+<section style="width: 60%; margin: 5rem auto" class="flex items-center">
+  <div style="width: 50%" class="flex justify-center">
+    <img src="assets/login.png" style="width: 100%" alt="" />
+  </div>
+  <div style="width: 50%; flex-direction: column" class="flex items-center">
+    <h2 style="margin-bottom: 1rem">Welcome Back!</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%">
+      
+      <div *ngIf="serverErrorMsg" class="server-message">
+        <p-message
+          severity="error"
+          icon="pi pi-times-circle"
+        >
+          {{ serverErrorMsg }}
+        </p-message>
+      </div>
+
+      <p-floatlabel style="width: 90%" variant="in">
+        <input
+          pInputText
+          id="in_label"
+          style="width: 100%; background-color: rgba(0, 0, 0, 0.89)"
+          autocomplete="off"
+          class=""
+          formControlName="email"
+        />
+        <label for="in_label">Email</label>
+      </p-floatlabel>
+      <div
+        class="error"
+        *ngIf="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+      >
+        Email is required and must be valid.
+      </div>
+
+      <p-floatlabel style="width: 90%; margin-top: 1rem" variant="in">
+        <input
+          pInputText
+          id="pL"
+          style="width: 100%; background-color: rgba(0, 0, 0, 0.89)"
+          formControlName="password"
+          type="password"
+        />
+        <label for="pL">Password</label>
+      </p-floatlabel>
+      <div
+        class="error"
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+      >
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">
+          Password is Required
+        </small>
+        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          Password Min Length is
+          {{loginForm.get('password')?.errors?.['minlength']?.requiredLength}}
+        </small>
+      </div>
+
+      <div style="margin-top: 1rem">
+        <a href="/"> Create new account? </a>
+      </div>
+
+      <div style="width: 90%">
+        <p-button type="submit" [style]="{ width: '100%', margin: '1rem 0' }"
+          >Login</p-button
+        >
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+<p-toolbar [style]="{ 'border-radius': '0rem', padding: '1REM 17rem' }">
+  <ng-template #start>
+    <div class="flex items-center" style="gap: 0.5rem">
+      <h2>LOGO</h2>
+    </div>
+  </ng-template>
+
+  <ng-template #center>
+    <div class="flex items-center" style="gap: 0.5rem">
+      <a
+        pButton
+        routerLink="/subjects"
+        routerLinkActive="active-link"
+        class="p-button-text custom-colored-button"
+      >
+        Home
+      </a>
+      <a
+        pButton 
+        routerLink="/history"
+        routerLinkActive="active-link"
+        class="p-button-text custom-colored-button"
+      >
+        History
+      </a>
+    </div>
+  </ng-template>
+
+  <ng-template #end>
+    <div class="flex items-center" style="gap: 1rem">
+      <!-- <p-button label="Toggle" (click)="menu.toggle($event)" /> -->
+      <p-tieredmenu #menu [model]="items" [popup]="true" />
+      <!-- <p-button label="Share" severity="contrast" size="small" /> -->
+      <p-avatar
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        [style]="{ width: '42px', height: '42px' }"
+        (click)="menu.toggle($event)"
+      />
+
+      <p-button
+        label="Notifications"
+        icon="pi pi-users"
+        badge="2"
+        badgeSeverity="contrast"
+        styleClass="m-0"
+        [outlined]="true"
+      />
+    </div>
+  </ng-template>
+</p-toolbar>

@@ -1,0 +1,18 @@
+::ng-deep .custom-colored-button.p-button {
+  text-decoration: none;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .custom-colored-button.p-button:hover {
+  background-color: purple;
+  color: white;
+}
+
+/* For routerLinkActive styling */
+::ng-deep .custom-colored-button.active-link.p-button {
+  background-color: #0059b3;
+  color: white;
+}

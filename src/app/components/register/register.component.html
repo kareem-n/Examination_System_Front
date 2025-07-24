@@ -1,0 +1,136 @@
+<p-dialog
+  header="Create New Account"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '26rem' }"
+>
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    @if ( serverError ) {
+    <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-2">{{
+      serverError
+    }}</p-message>
+    }
+
+    <!-- <span class="p-text-secondary block mb-8">Update your information.</span> -->
+    <div style="gap: 1rem; margin-top: 1rem" class="flex items-center">
+      <label style="width: 20%" for="username">Username</label>
+      <input
+        formControlName="username"
+        style="flex-grow: 1"
+        pInputText
+        id="username"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+
+    @if ( registerForm.get("username")?.touched &&
+    !registerForm.get('username')?.valid ) {
+    <div class="flex" style="gap: 1rem; padding: 0.5rem">
+      <div style="width: 20%"></div>
+      <p-message severity="error" variant="simple" size="small"
+        >Username is required</p-message
+      >
+    </div>
+    }
+
+    <div style="gap: 1rem; margin-top: 1rem" class="flex items-center">
+      <label style="width: 20%" for="email">Email</label>
+      <input
+        formControlName="email"
+        style="flex-grow: 1"
+        pInputText
+        id="email"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+
+    @if ( registerForm.get("email")?.touched &&
+    !registerForm.get('email')?.valid ) {
+    <div class="flex" style="gap: 1rem; padding: 0.5rem">
+      <div style="width: 20%"></div>
+      @if ( registerForm.get('email')?.errors?.['email'] ) {
+      <p-message severity="error" variant="simple" size="small"
+        >Invalid Email</p-message
+      >
+      }@else {
+      <p-message severity="error" variant="simple" size="small"
+        >Email is required</p-message
+      >
+      }
+    </div>
+    }
+
+    <div style="gap: 1rem; margin-top: 1rem" class="flex items-center">
+      <label style="width: 20%" for="password">Password</label>
+      <input
+        formControlName="password"
+        style="flex-grow: 1"
+        pInputText
+        id="password"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+
+    @if ( registerForm.get("password")?.touched &&
+    !registerForm.get('password')?.valid ) {
+    <div class="flex" style="gap: 1rem; padding: 0.5rem">
+      <div style="width: 20%"></div>
+      @if ( registerForm.get('password')?.errors?.['passwordComplexity'] ) {
+      <p-message severity="error" variant="simple" size="small"
+        >Password should be at least 6 chars</p-message
+      >
+      }@else {
+      <p-message severity="error" variant="simple" size="small"
+        >Password is required</p-message
+      >
+      }
+    </div>
+    }
+
+    <div style="gap: 1rem; margin-top: 1rem" class="flex items-center">
+      <label style="width: 20%" for="cpassword">Confirm Password</label>
+      <input
+        formControlName="cpassword"
+        style="flex-grow: 1"
+        pInputText
+        id="cpassword"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+
+    @if (registerForm.errors?.['passwordsMismatch'] &&
+    registerForm.get('cpassword')?.touched) {
+    <div class="flex" style="gap: 1rem; padding: 0.5rem">
+      <div style="width: 20%"></div>
+      <p-message severity="error" variant="simple" size="small"
+        >Passwords not matched</p-message
+      >
+    </div>
+
+    } @if ( registerForm.get("cpassword")?.touched &&
+    !registerForm.get('cpassword')?.valid ) {
+    <div class="flex" style="gap: 1rem; padding: 0.5rem">
+      <div style="width: 20%"></div>
+      <p-message severity="error" variant="simple" size="small"
+        >Confirm Password is required</p-message
+      >
+    </div>
+    }
+
+    <div style="gap: 1rem; margin-top: 1rem" class="flex justify-center">
+      <p style="color: rgb(187, 187, 187); font-size: 0.89em">
+        Already Have an account?
+        <a (click)="visible = false" routerLink="/login">Login</a>
+      </p>
+    </div>
+
+    <div style="margin-top: 3rem; gap: 1rem" class="flex justify-center">
+      <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+      <p-button label="Save" type="submit" />
+    </div>
+  </form>
+</p-dialog>

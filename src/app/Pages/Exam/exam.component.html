@@ -1,0 +1,103 @@
+<div style="margin-top: 1rem">
+  @if ( submit ) {
+  <p-message severity="success">Exam Submmited successfuly</p-message>
+  } @if (serverError != "") {
+  <div
+    style="margin: 3rem; display: flex; justify-content: center; flex-direction: column; gap: 1rem;"
+    class="flex items-center"
+  >
+    <p-message
+      severity="error"
+      icon="pi pi-times"
+      size="large"
+      [style]="{ backgroundColor: 'blue' }"
+    >
+      {{ serverError }}
+    </p-message>
+
+    <a style="text-decoration: none;" routerLink="/history" pButton> Move To History </a>
+  </div>
+
+  } @if (data != null) {
+
+  <div class="timer">
+    <div class="">
+      <h1>{{ data?.title }}</h1>
+      <p style="margin-top: 0.5rem">
+        Total Questions :
+        <span style="color: rgb(155, 155, 155)"
+          >( {{ data?.questions?.length }} )
+        </span>
+      </p>
+    </div>
+    <div style="gap: 0.5rem" class="countdown flex items-center">
+      <i class="pi pi-clock"></i>
+      <span>{{ minutes.toString().padStart(2, "0") }}</span>
+      :
+      <span>{{ seconds.toString().padStart(2, "0") }}</span>
+    </div>
+  </div>
+
+  <p-stepper [value]="1">
+    @for (item of data?.questions; track $index; ) {
+    <p-step-item [value]="$index + 1" style="margin: 0.5rem">
+      <!--  -->
+
+      <!--  -->
+      <div
+        [ngStyle]="{
+          border: shouldHighLight(item.id) && '3px solid red'
+        }"
+        style="background-color: rgb(53, 53, 53); border-radius: 10px"
+      >
+        <p-step>
+          <span style="color: #fff; font-weight: bolder; font-size: 1rem"
+            >{{ item.questionTxt }} ?</span
+          ></p-step
+        >
+      </div>
+      <p-step-panel style="border-radius: 10px; margin-top: 0.5rem">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex">
+            <div class="questionCard">
+              @for (option of item.options; track $index) {
+              <div class="flex items-center" style="gap: 0.4rem">
+                <p-radiobutton
+                  [name]="option.answerTxt"
+                  [value]="option.answerTxt"
+                  [inputId]="option.id"
+                  [(ngModel)]="test"
+                  (onClick)="selectAnswer(item.id, option.id)"
+                />
+                <label [for]="option.id" class="ml-2">{{
+                  option.answerTxt
+                }}</label>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="flex" style="gap: 1rem; padding: 1rem 0">
+            @if ( !$first ) {
+            <p-button
+              label="Prev"
+              severity="secondary"
+              (onClick)="activateCallback($index)"
+            />
+            } @if ( !$last ) {
+            <p-button label="Next" (onClick)="activateCallback($index + 2)" />
+            }
+          </div>
+        </ng-template>
+      </p-step-panel>
+    </p-step-item>
+    }
+  </p-stepper>
+  <button
+    (click)="submitExam()"
+    pButton
+    severity="success"
+    label="Submit Exam"
+    size="large"
+  ></button>
+  }
+</div>

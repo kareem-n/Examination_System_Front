@@ -1,0 +1,23 @@
+.questionCard {
+    padding: 2rem;
+    padding-left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.timer {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    display: flex ;
+    align-items: center;
+    justify-content: space-between;
+}
+.timer .countdown {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 100px;
+    padding: 0.5rem 0.7rem;
+    background-color: rgb(38, 128, 108);
+    color: #fff;
+}

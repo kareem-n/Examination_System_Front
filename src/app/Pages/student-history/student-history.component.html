@@ -1,0 +1,43 @@
+
+
+<h1 style="margin: 1rem 0;">Exam History</h1>
+
+<div class="">
+
+</div>
+
+<p-table
+  [columns]="cols"
+  [value]="data.data.items"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template #header let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        @if ( col.field == 'startTime' || col.field == "endTime" ) {
+            {{ rowData[col.field] |  date:'medium'  }}
+        }
+        @else if ( col.field == "status" ) { 
+            <p-tag [severity]="
+                rowData[col.field] == 'completed' ? 'success' : 'info'" [value]="rowData[col.field]" />
+        }
+        @else {
+
+            {{ rowData[col.field] }}
+        }
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage>
+        <tr>
+            <td colspan="5">No Exams found.</td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,0 +1,70 @@
+<div class="subjects-page">
+  <div class="controls">
+    <div class="flex">
+      <input
+        pInputText
+        [(ngModel)]="searchTerm"
+        placeholder="Search Subjects..."
+        style="
+          width: 100%;
+          border-end-end-radius: 0;
+          border-start-end-radius: 0;
+        "
+      />
+      <p-button
+        icon="pi pi-search"
+        [loading]="loading"
+        (onClick)="search()"
+        [style]="{ height: '100%' }"
+      />
+    </div>
+    <p-divider />
+    <div class="">
+      <!-- <p>Order By :</p> -->
+      <p-select
+        [options]="orderby"
+        [(ngModel)]="selectedCity"
+        optionLabel="name"
+        placeholder="Order By"
+        class="w-full md:w-56"
+        (onChange)="Sort()"
+      />
+    </div>
+  </div>
+  <div class="subjects-container">
+    @for (item of data?.data?.items; track $index) {
+
+    <div class="flex items-center justify-between">
+      <div class="">
+        <h2>
+          {{ item.title }}
+        </h2>
+
+        <p style="color: rgb(199, 199, 199); margin-top: 0.6rem">
+          {{ item.description }}
+        </p>
+        <p style="margin-top: 1rem">
+          Number of Questions : <p-badge [value]="item.totalQuestions" />
+        </p>
+      </div>
+
+      <a
+        label="Take Exam"
+        [routerLink]="['/exam', item.id]"
+        style="text-decoration: none"
+        pButton
+      ></a>
+    </div>
+
+    <p-divider />
+
+    }
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="0"
+      [rows]="1"
+      [totalRecords]="data?.data?.count"
+      [rowsPerPageOptions]="[1, 2, 3]"
+    />
+  </div>
+</div>
