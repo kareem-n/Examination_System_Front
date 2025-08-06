@@ -1,0 +1,95 @@
+<div style="display: flex; height: 100vh">
+  <!-- Sidebar -->
+  <div
+    style="
+      width: 350px !important;
+      flex-grow: 0;
+      background-color: #033638;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 0;
+    "
+  >
+    <!-- Logo -->
+    <div
+      style="
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 1rem 0;
+        border-bottom: 1px solid #34495e;
+      "
+    >
+      Dashboard
+    </div>
+
+    <!-- Navigation Links -->
+    <div style="flex-grow: 1">
+      <ul style="list-style: none; padding: 0">
+        <li style="padding: 1rem; cursor: pointer">
+          <a routerLink="/admin/stat" class="link">
+            <i class="pi pi-chart-bar"></i>
+            Statistics
+          </a>
+        </li>
+        <li style="padding: 1rem; cursor: pointer">
+          <a routerLink="/admin/stat" class="link">
+            <i class="pi pi-user"></i>
+            Users
+          </a>
+        </li>
+        <li style="padding: 1rem; cursor: pointer">
+          <a routerLink="/admin/subjects" class="link">
+            <i class="pi pi-cog"></i>
+            Subjects
+          </a>
+        </li>
+        <li style="padding: 1rem; cursor: pointer">
+          <a routerLink="/admin/questions" class="link">
+            <i class="pi pi-pen-to-square"></i>
+            Questions
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div
+      style="border-top: 1px solid #033638; padding: 1rem; text-align: center"
+    >
+      <button
+        pButton
+        type="button"
+        label="Logout"
+        icon="pi pi-sign-out"
+        class="p-button-sm p-button-danger"
+      >
+        logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div style=" width: 100%;display: flex; flex-direction: column">
+    <!-- Top Navbar -->
+    <div
+      style="
+        background-color: #033638;
+        color: white;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        padding: 1rem 1rem;
+      "
+    >
+      <span style="font-size: 1.2rem; font-weight: 500">Admin Panel</span>
+    </div>
+
+    <!-- Page Content -->
+    <div style="flex-grow: 1; padding: 1rem">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="flex items-center justify-between" style="margin-bottom: 1rem">
+  <button
+    pButton
+    label="Add new Question"
+    icon="pi pi-plus"
+    (click)="showAddDialog = true"
+  ></button>
+
+  <p-select
+    [options]="subjects"
+    [(ngModel)]="selectedSubject"
+    optionLabel="name"
+    placeholder="Select a Subject"
+    class="w-full md:w-56"
+    (onChange)="subjectSelectedChange()"
+  />
+</div>
+<div class="">
+  <p-table
+    [columns]="cols"
+    [value]="data?.data?.items!"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template #header let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          @if(col.field == "controlls"){
+
+          <!-- hide -->
+          <p-button
+            (click)="openDialog(rowData['id'])"
+            [style]="{ marginLeft: '1rem' }"
+            icon="pi pi-pen-to-square"
+            severity="info"
+            [outlined]="true"
+          />
+
+          } @else if ( col.field == "questionAnswerDtos" ) {
+          <!-- Answers Array -->
+          <li *ngFor="let a of rowData[col.field]">
+            <span [ngClass]="{correct : a.isCorrect}">
+              {{ a.answerTxt }}
+            </span>
+          </li>
+          } @else {
+          {{ rowData[col.field] }}
+          }
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="5">No Subjects found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-paginator
+    [style]="{ marginTop: '2rem' }"
+    (onPageChange)="onPageChange($event)"
+    [first]="0"
+    [rows]="10"
+    [totalRecords]="data?.data?.count"
+    [rowsPerPageOptions]="[10, 15, 20]"
+  />
+</div>
+
+<app-add-question
+  [showEdit]="showAddDialog"
+  (showedit)="closeAddDialog($event)"
+>
+</app-add-question>
+
+<!-- <app-add-subject [showEdit]="showAddDialog" (showedit)="closeAddDialog($event)" (reloadData)="$event == true && LoadData()">
+</app-add-subject> -->
+
+<p-toast />
+<p-confirmdialog />

@@ -1,0 +1,197 @@
+<p-dialog
+  [(visible)]="showEdit"
+  (onHide)="this.showedit.next(false)"
+  [style]="{ width: '25rem' }"
+>
+  <form [formGroup]="form">
+    <span
+      style="
+        font-size: 1.3rem;
+        color: #929aac;
+        display: block;
+        margin-bottom: 1.5rem;
+      "
+    >
+      Add New Question
+    </span>
+
+    @if (servError.length > 0) {
+    <p-message
+      severity="error"
+      icon="pi pi-times-circle"
+      [style]="{ margin: '1rem 0' }"
+      >{{ servError }}</p-message
+    >
+
+    }
+
+    <!-- Title -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Question Head</label>
+        <input
+          pInputText
+          formControlName="questionHead"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('questionHead')?.touched && form.get('questionHead')?.errors?.['required']"
+      >
+        Question Head is required
+      </small>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="difficulty" class="block font-medium mb-1">Difficulty</label>
+      <p-select
+        [style]="{ margin: '1rem 3rem' }"
+        id="difficulty"
+        [options]="difficultyLevels"
+        formControlName="difficulty"
+        placeholder="Select Difficulty"
+        optionLabel="label"
+        [ngClass]="{`red` : isInvalid('difficulty')}"
+      ></p-select>
+    </div>
+
+    <div class="mb-3">
+      <label for="subjectt" class="block font-medium mb-1">Subject</label>
+      <p-select
+        [style]="{ margin: '1rem 3.6rem' }"
+        id="subjectt"
+        [options]="SUbjectList"
+        formControlName="subject"
+        placeholder="Select Subject"
+        optionLabel="label"
+        [ngClass]="{`red` : isInvalid('subject')}"
+      ></p-select>
+    </div>
+
+    <!-- Easy -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Option 1</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="ans1"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+        <input
+          type="radio"
+          formControlName="correct"
+          name="correct"
+          value="1"
+          class="rad"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('ans1')?.touched && form.get('ans1')?.errors"
+      >
+        <span *ngIf="form.get('ans1')?.errors?.['required']"
+          >Option 1 is required</span
+        >
+      </small>
+    </div>
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Option 2</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="ans2"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+        <input
+          type="radio"
+          formControlName="correct"
+          name="correct"
+          value="2"
+          class="rad"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('ans2')?.touched && form.get('ans2')?.errors"
+      >
+        <span *ngIf="form.get('ans2')?.errors?.['required']"
+          >Option 2 is required</span
+        >
+      </small>
+    </div>
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Option 3</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="ans3"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+
+        <input
+          type="radio"
+          formControlName="correct"
+          name="correct"
+          value="3"
+          class="rad"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('ans3')?.touched && form.get('ans3')?.errors"
+      >
+        <span *ngIf="form.get('ans3')?.errors?.['required']"
+          >Option 3 is required</span
+        >
+      </small>
+    </div>
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Option 4</label>
+        <input
+          type="text"
+          pInputText
+          formControlName="ans4"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+
+        <input
+          type="radio"
+          formControlName="correct"
+          name="correct"
+          value="4"
+          class="rad"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('ans4')?.touched && form.get('ans4')?.errors"
+      >
+        <span *ngIf="form.get('ans4')?.errors?.['required']"
+          >Option 4 is required</span
+        >
+      </small>
+    </div>
+  </form>
+
+  <ng-template #footer>
+    <p-button
+      label="Cancel"
+      [text]="true"
+      (click)="showedit.next(false); showEdit = false"
+      severity="danger"
+    ></p-button>
+    <p-button
+      label="ADD"
+      [outlined]="true"
+      severity="success"
+      [disabled]="form.invalid"
+      (click)="save()"
+    ></p-button>
+  </ng-template>
+</p-dialog>

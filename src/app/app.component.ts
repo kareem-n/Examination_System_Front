@@ -9,7 +9,7 @@ import { RegisterComponent } from "./components/register/register.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ButtonModule, HeaderComponent, RouterOutlet, CommonModule, RegisterComponent],
+  imports: [ButtonModule, RouterOutlet, CommonModule, RegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

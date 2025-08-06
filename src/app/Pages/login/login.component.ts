@@ -14,18 +14,20 @@ import { Message } from 'primeng/message';
 import { AuthService } from '../../_services/auth.service';
 import { errorContext } from 'rxjs/internal/util/errorContext';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   selector: 'app-login',
   imports: [
-  FloatLabelModule,
+    FloatLabelModule,
     CommonModule,
     InputTextModule,
     FormsModule,
     ButtonModule,
     ReactiveFormsModule,
     Message,
-  ],
+    HeaderComponent
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -40,7 +42,7 @@ export class LoginComponent {
 
   serverErrorMsg: string = '';
 
-  constructor(public authService: AuthService , private nav:Router) {}
+  constructor(public authService: AuthService, private nav: Router) {}
 
   onSubmit() {
     if (this.loginForm.valid) {
@@ -50,10 +52,14 @@ export class LoginComponent {
           password: this.loginForm.value.password!,
         })
         .subscribe(
-          (res:any) => {
-            localStorage.setItem("token" ,res?.['data']?.['accessToken'])
+          (res: any) => {
+            localStorage.setItem('token', res?.['data']?.['accessToken']);
             this.authService.DecodeToken();
-            this.nav.navigate(["/"])
+            if (this.authService.GetUserRole() == 'student') {
+              this.nav.navigate(['/']);
+            } else {
+              this.nav.navigate(['/admin']);
+            }
           },
           (err) => {
             this.serverErrorMsg = err?.['error']?.['message'];

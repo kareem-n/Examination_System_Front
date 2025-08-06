@@ -16,7 +16,7 @@
         Home
       </a>
       <a
-        pButton 
+        pButton
         routerLink="/history"
         routerLinkActive="active-link"
         class="p-button-text custom-colored-button"
@@ -28,23 +28,47 @@
 
   <ng-template #end>
     <div class="flex items-center" style="gap: 1rem">
-      <!-- <p-button label="Toggle" (click)="menu.toggle($event)" /> -->
-      <p-tieredmenu #menu [model]="items" [popup]="true" />
-      <!-- <p-button label="Share" severity="contrast" size="small" /> -->
-      <p-avatar
-        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-        [style]="{ width: '42px', height: '42px' }"
-        (click)="menu.toggle($event)"
-      />
+      <div>
+        <p-tieredmenu #menu [model]="items" [popup]="true" />
 
-      <p-button
-        label="Notifications"
-        icon="pi pi-users"
-        badge="2"
-        badgeSeverity="contrast"
-        styleClass="m-0"
-        [outlined]="true"
-      />
+        <p-avatar
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          [style]="{ width: '42px', height: '42px' }"
+          (click)="menu.toggle($event)"
+        />
+      </div>
+      <div style="position: relative">
+        @if (notificationVisible) {
+        <div #notificationBox class="notification">
+          @for (item of items2; track $index) {
+          <div [ngClass]="{ red: item.isRead }" class="notification-item flex justify-between">
+            <span>
+              {{ item.message }}
+            </span>
+            <span>
+              {{ item.createdAt | date : "short" }}
+            </span>
+          </div>
+          @if (!$last) {
+          <div class="divider"></div>
+          <!-- <p-divider />  -->
+          } }@empty {
+          <div class="notification-item">No Notifications</div>
+          }
+        </div>
+        }
+        <button
+          pButton
+          size="large"
+          icon="pi pi-bell"
+          badgeSeverity="contrast"
+          styleClass="m-0"
+          [outlined]="true"
+          (click)="viewNotifcation()"
+        >
+          <p-badge size="small" [value]="counter"></p-badge>
+        </button>
+      </div>
     </div>
   </ng-template>
 </p-toolbar>

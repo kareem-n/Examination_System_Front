@@ -1,0 +1,14 @@
+
+.red {
+  border-color: red;
+}
+
+.rad {
+  width: 20px;
+  height: 20px;
+}
+/* 
+.rad:checked {
+  border-color: red;
+  background-color: red ;
+} */

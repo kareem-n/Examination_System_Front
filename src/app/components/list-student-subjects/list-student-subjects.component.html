@@ -32,7 +32,11 @@
     </div>
   </div>
   <div class="subjects-container">
-    @for (item of data?.data?.items; track $index) {
+    @if ( loading ) {
+    <div class="flex justify-center items-center" style="min-height: 300px">
+      <p-progress-spinner ariaLabel="loading" />
+    </div>
+    }@else { @for (item of data?.data?.items; track $index) {
 
     <div class="flex items-center justify-between">
       <div class="">
@@ -58,11 +62,12 @@
 
     <p-divider />
 
-    }
+    } }
+
     <p-paginator
       (onPageChange)="onPageChange($event)"
       [first]="0"
-      [rows]="1"
+      [rows]="data?.data?.count"
       [totalRecords]="data?.data?.count"
       [rowsPerPageOptions]="[1, 2, 3]"
     />

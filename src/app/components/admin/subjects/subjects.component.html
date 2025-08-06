@@ -1,0 +1,85 @@
+<div class="flex items-center justify-between">
+  <h1 style="margin: 1rem 0">All Subjects</h1>
+  <button
+    pButton
+    label="Add new Subject"
+    icon="pi pi-plus"
+    (click)="showAddDialog = true"
+  ></button>
+</div>
+<div class="">
+  <p-table
+    [columns]="cols"
+    [value]="data?.data?.items!"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template #header let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          @if(col.field == "controlls"){
+          <p-button
+            (click)="confirm2($event, rowData['id'])"
+            icon="pi pi-times"
+            severity="danger"
+            [outlined]="true"
+          />
+          <!-- hide -->
+          <p-button
+            (click)="openDialog(rowData['id'])"
+            [style]="{ marginLeft: '1rem' }"
+            icon="pi pi-pen-to-square"
+            severity="info"
+            [outlined]="true"
+          />
+
+          } @else if (col.field == 'test') {
+
+          <p-badge [value]="rowData[`easy`]+'%'" severity="success" />
+          <p-badge
+            [value]="rowData[`meduim`]+'%'"
+            severity="warn"
+            [style]="{ margin: '0 0.3rem' }"
+          />
+          <p-badge [value]="rowData[`hard`]+'%'" severity="danger" />
+
+          } @else {
+          {{ rowData[col.field] }}
+          }
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="5">No Subjects found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-paginator
+    [style]="{ marginTop: '2rem' }"
+    (onPageChange)="onPageChange($event)"
+    [first]="0"
+    [rows]="10"
+    [totalRecords]="data?.data?.count!"
+    [rowsPerPageOptions]="[10, 15, 20]"
+  />
+</div>
+
+<app-edit-subject
+  [ItemEdit]="toEdit!"
+  (showedit)="test($event)"
+  [showEdit]="showEdit"
+></app-edit-subject>
+
+<app-add-subject [showEdit]="showAddDialog" (showedit)="closeAddDialog($event)" (reloadData)="$event == true && LoadData()">
+</app-add-subject>
+
+<p-toast />
+<p-confirmdialog />

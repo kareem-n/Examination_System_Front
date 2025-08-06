@@ -16,3 +16,35 @@
   background-color: #0059b3;
   color: white;
 }
+
+.notification {
+  position: absolute;
+  z-index: 9999;
+  top: 120%;
+  right: 0%;
+  width: 300px;
+  max-height: 300px;
+  border-radius: 10px;
+  overflow: hidden ;
+  overflow-y: auto;
+  background-color: rgb(75, 85, 77);
+}
+
+.notification-item {
+  padding: 1.5rem 1rem;
+}
+
+.notification-item:hover {
+  background-color: rgb(85, 98, 87);
+
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(221, 221, 221, 0.36);
+}
+
+.red {
+    background-color: rgb(36, 44, 38);
+
+}

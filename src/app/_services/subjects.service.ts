@@ -41,4 +41,33 @@ export class SubjectsService {
       this.baseUrl + `/allSubjects${q}`
     );
   }
+
+  DelSubject(id: number) {
+    return this.http.delete(this.baseUrl + '/DeleteSubject/' + id);
+  }
+
+  UpdateSubject(
+    id: string,
+    body: {
+      title: string;
+      description: string;
+      numberOfQuestions: number;
+      easy: number;
+      normal: number;
+      hard: number;
+    }
+  ) {
+    return this.http.put(this.baseUrl + '/UpdateSubject/' + id, body);
+  }
+
+  AddNewSubject(body: {
+    title: string;
+    description: string;
+    numberOfQuestions: number;
+    easy: number;
+    normal: number;
+    hard: number;
+  }) {
+    return this.http.post(this.baseUrl, body);
+  }
 }

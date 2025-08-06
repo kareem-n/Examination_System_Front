@@ -11,14 +11,13 @@ export class studentGuard implements CanActivate {
 
 
   canActivate(){
-    console.log(this.authService.GetUserRole());
     
     if( !this.authService.GetToken() ){
       this.router.navigate(['/login'])
       return false; 
     } 
 
-    if(  this.authService.GetUserRole() == "student" ){
+    if( this.authService.GetUserRole() == "student" ){
       return true; 
     }
 

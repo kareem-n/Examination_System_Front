@@ -1,0 +1,166 @@
+<p-dialog
+  [(visible)]="showEdit"
+  (onHide)="this.showedit.next(false)"
+  [style]="{ width: '25rem' }"
+>
+  <form [formGroup]="form">
+    <span
+      style="
+        font-size: 1.3rem;
+        color: #929aac;
+        display: block;
+        margin-bottom: 1.5rem;
+      "
+    >
+      Update Subject.
+    </span>
+
+    <!-- Title -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Title</label>
+        <input
+          pInputText
+          formControlName="title"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('title')?.touched && form.get('title')?.errors?.['required']"
+      >
+        Title is required
+      </small>
+    </div>
+
+    <!-- Description -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Description</label>
+        <input
+          pInputText
+          formControlName="description"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('description')?.touched && form.get('description')?.errors?.['required']"
+      >
+        Description is required
+      </small>
+    </div>
+
+    <!-- Total Questions -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem"># Questions</label>
+        <input
+          type="number"
+          pInputText
+          formControlName="totalQuestions"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="
+          form.get('totalQuestions')?.touched &&
+          form.get('totalQuestions')?.errors
+        "
+      >
+        <span *ngIf="form.get('totalQuestions')?.errors?.['required']"
+          >Total questions is required</span
+        >
+        <span *ngIf="form.get('totalQuestions')?.errors?.['min']"
+          >Must be at least 1</span
+        >
+      </small>
+    </div>
+
+    <!-- Easy -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Easy%</label>
+        <input
+          type="number"
+          pInputText
+          formControlName="easy"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('easy')?.touched && form.get('easy')?.errors"
+      >
+        <span *ngIf="form.get('easy')?.errors?.['required']"
+          >Easy is required</span
+        >
+        <span *ngIf="form.get('easy')?.errors?.['min']">Minimum is 0</span>
+        <span *ngIf="form.get('easy')?.errors?.['max']">Maximum is 100</span>
+      </small>
+    </div>
+
+    <!-- Medium -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Medium%</label>
+        <input
+          type="number"
+          pInputText
+          formControlName="meduim"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('meduim')?.touched && form.get('meduim')?.errors"
+      >
+        <span *ngIf="form.get('meduim')?.errors?.['required']"
+          >Medium is required</span
+        >
+        <span *ngIf="form.get('meduim')?.errors?.['min']">Minimum is 0</span>
+        <span *ngIf="form.get('meduim')?.errors?.['max']">Maximum is 100</span>
+      </small>
+    </div>
+
+    <!-- Hard -->
+    <div style="margin-bottom: 1rem">
+      <div style="display: flex; align-items: center; gap: 1rem">
+        <label style="font-weight: 600; width: 6rem">Hard%</label>
+        <input
+          type="number"
+          pInputText
+          formControlName="hard"
+          style="flex: 1 1 auto; padding: 0.4rem"
+        />
+      </div>
+      <small
+        style="color: red; margin-left: 7rem; padding: 0.5rem 0"
+        *ngIf="form.get('hard')?.touched && form.get('hard')?.errors"
+      >
+        <span *ngIf="form.get('hard')?.errors?.['required']"
+          >Hard is required</span
+        >
+        <span *ngIf="form.get('hard')?.errors?.['min']">Minimum is 0</span>
+        <span *ngIf="form.get('hard')?.errors?.['max']">Maximum is 100</span>
+      </small>
+    </div>
+  </form>
+
+  <ng-template #footer>
+    <p-button
+      label="Cancel"
+      [text]="true"
+      (click)="showedit.next(false); showEdit = false"
+      severity="danger"
+    ></p-button>
+    <p-button
+      label="Save"
+      [outlined]="true"
+      severity="info"
+      [disabled]="form.invalid"
+      (click)="save()"
+    ></p-button>
+  </ng-template>
+</p-dialog>

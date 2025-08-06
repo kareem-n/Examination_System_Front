@@ -11,6 +11,7 @@ import { Select } from 'primeng/select';
 import { RouterLink } from '@angular/router';
 import { IPageResult } from '../../interfaces/IPageResult';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 interface SortBy {
   name: string;
@@ -27,6 +28,7 @@ interface SortBy {
     InputTextModule,
     FormsModule,
     Select,
+    ProgressSpinnerModule,
     PaginatorModule,
   ],
   templateUrl: './list-student-subjects.component.html',
@@ -35,6 +37,8 @@ interface SortBy {
 export class ListStudentSubjectsComponent implements OnInit {
   data: IGlobalResponse<IPageResult<ISubject>> | null = null;
 
+  load = true; 
+
   onPageChange(event: PaginatorState) {
 
     this.query.pageIndex = event.page && event.page + 1;
@@ -42,8 +46,6 @@ export class ListStudentSubjectsComponent implements OnInit {
 
     this.LoadData();
 
-    // this.first = event.first ?? 0;
-    // this.rows = event.rows ?? 10;
   }
 
   ///
@@ -78,7 +80,7 @@ export class ListStudentSubjectsComponent implements OnInit {
       next: (res) => {
         // console.log(res.data);
         this.data = res;
-        this.loading = false;
+        this.loading = false
       },
       error: (err) => {
         console.log(err);

@@ -1,0 +1,131 @@
+<div style="flex-wrap: wrap" class="flex">
+  <div style="width: 50%; padding: 2rem">
+    <p-chart
+      type="line"
+      [data]="data"
+      [options]="options"
+      style="height: 50%"
+    />
+  </div>
+
+  <div style="width: 50%; padding: 2rem">
+    <p-chart type="bar" [data]="data2" [options]="options2" />
+  </div>
+
+  <div style="width: 50%; padding: 1rem 10rem">
+    <p-chart type="pie" [data]="data3" [options]="options3" class="h-[30rem]" />
+  </div>
+
+  <div
+    style="width: 50%; padding: 0 3rem; flex-wrap: wrap"
+    class="flex items-start justify-between"
+  >
+    <div style="width: 100%;gap: 1rem;" class="flex justify-between">
+      <div
+        pRipple
+        class="box flex items-center"
+        style="
+          padding: 1rem;
+          color: #fff;
+          background-color: rgb(51, 49, 49);
+          flex-direction: column;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          --p-ripple-background: rgba(255, 193, 6, 0.3);
+          border-radius: 10px;
+        "
+      >
+        <span style="font-size: 1rem; font-weight: bold;text-align: center;"> TotaL Exams </span>
+        <span style="margin-top: 0.5rem; color: rgb(0, 248, 0);font-size: 2rem;">{{totalNumbers!.totalExams}}</span>
+      </div>
+ 
+      <div
+        pRipple
+        class="box flex items-center"
+        style="
+          padding: 1rem;
+          color: #fff;
+          background-color: rgb(51, 49, 49);
+          flex-direction: column;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          --p-ripple-background: rgba(255, 193, 6, 0.3);
+          border-radius: 10px;
+        "
+      >
+        <span style="font-size: 1rem; font-weight: bold;text-align: center;"> TotaL Users </span>
+        <span style="margin-top: 0.5rem; color: rgb(0, 248, 0);font-size: 2rem;">{{totalNumbers!.totalUsers}}</span>
+      </div>
+ 
+      <div
+        pRipple
+        class="box flex items-center"
+        style="
+          padding: 1rem;
+          color: #fff;
+          background-color: rgb(51, 49, 49);
+          flex-direction: column;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          --p-ripple-background: rgba(255, 193, 6, 0.3);
+          border-radius: 10px;
+        "
+      >
+        <span style="font-size: 1rem; font-weight: bold;text-align: center;"> TotaL Subjects </span>
+        <span style="margin-top: 0.5rem; color: rgb(0, 248, 0);font-size: 2rem;">{{totalNumbers!.totalSubjects}}</span>
+      </div>
+ 
+     
+      
+    </div>
+
+    <div style="width: 100%" class="flex justify-between">
+      <div
+        pRipple
+        class="box flex items-center"
+        style="
+          padding: 1rem;
+          color: #fff;
+          background-color: rgb(51, 49, 49);
+          flex-direction: column;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          --p-ripple-background: rgba(255, 193, 6, 0.3);
+          border-radius: 10px;
+        "
+      >
+        <span style="font-size: 1.3rem; font-weight: bold"> AVG Score </span>
+        <span style="margin-top: 1rem; color: rgb(0, 248, 0);font-size: 2rem;">{{totalNumbers!.avgScore}}</span>
+      </div>
+
+      <div
+        pRipple
+        class="box flex items-center"
+        style="
+          padding: 1rem;
+          color: #fff;
+          background-color: rgb(51, 49, 49);
+          flex-direction: column;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          --p-ripple-background: rgba(255, 193, 6, 0.3);
+          border-radius: 10px;
+        "
+      >
+        <span style="font-size: 1.3rem; font-weight: bold"> Max Score </span>
+        <span style="margin-top: 1rem; color: rgb(0, 248, 0);font-size: 2rem;">{{totalNumbers!.maxScore}}</span>
+      </div>
+      <div
+        pRipple
+        class="box flex items-center"
+        style="
+          padding: 1rem;
+          color: #fff;
+          background-color: rgb(51, 49, 49);
+          flex-direction: column;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          --p-ripple-background: rgba(255, 193, 6, 0.3);
+          border-radius: 10px;
+        "
+      >
+        <span style="font-size: 1.3rem; font-weight: bold"> Min Score </span>
+        <span style="margin-top: 1rem; color: rgb(0, 248, 0);font-size: 2rem;">{{totalNumbers!.minScore}}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { IGlobalResponse } from '../interfaces/globalResponse';
 import { IExam } from '../interfaces/IExam';
 import { IExamQuestionAnswer } from '../interfaces/ExamQuestionAnswer';
 import { IUserExam } from '../interfaces/IUserExam';
+import { IPageResult } from '../interfaces/IPageResult';
 
 @Injectable({
   providedIn: 'root',
@@ -41,10 +42,13 @@ export class ExamService {
   }
 
   GetUserExam() {
-    return this.http.get<IGlobalResponse<IUserExam>>(this.baseUrl + '/GetUserExams', {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    });
+    return this.http.get<IGlobalResponse<IPageResult<IUserExam>>>(
+      this.baseUrl + '/GetUserExams',
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
+    );
   }
 }
